@@ -4,7 +4,7 @@ node.name: wait-times
 #path.data: /path/to/data
 #path.logs: /path/to/logs
 #bootstrap.memory_lock: true
-#network.host: 192.168.0.1
+network.host: 0.0.0.0
 #http.port: 9200
 #discovery.zen.ping.unicast.hosts: ["host1", "host2"]
 #discovery.zen.minimum_master_nodes: 3
