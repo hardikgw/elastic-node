@@ -1,0 +1,100 @@
+[2016-11-10T09:34:30,516][WARN ][o.e.c.l.LogConfigurator  ] ignoring unsupported logging configuration file [/es/config/logging.yml], logging is configured via [/es/config/log4j2.properties]
+[2016-11-10T09:34:31,188][INFO ][o.e.n.Node               ] [wait-times] initializing ...
+[2016-11-10T09:34:31,431][INFO ][o.e.e.NodeEnvironment    ] [wait-times] using [1] data paths, mounts [[/elasticsearch-5.0.0/data (osxfs)]], net usable_space [351.9gb], net total_space [464.6gb], spins? [possibly], types [fuse.osxfs]
+[2016-11-10T09:34:31,433][INFO ][o.e.e.NodeEnvironment    ] [wait-times] heap size [1.9gb], compressed ordinary object pointers [true]
+[2016-11-10T09:34:31,453][INFO ][o.e.n.Node               ] [wait-times] version[5.0.0], pid[6], build[253032b/2016-10-26T04:37:51.531Z], OS[Linux/4.4.27-moby/amd64], JVM[Oracle Corporation/OpenJDK 64-Bit Server VM/1.8.0_111/25.111-b14]
+[2016-11-10T09:34:34,623][INFO ][o.e.p.PluginsService     ] [wait-times] loaded module [aggs-matrix-stats]
+[2016-11-10T09:34:34,625][INFO ][o.e.p.PluginsService     ] [wait-times] loaded module [ingest-common]
+[2016-11-10T09:34:34,626][INFO ][o.e.p.PluginsService     ] [wait-times] loaded module [lang-expression]
+[2016-11-10T09:34:34,627][INFO ][o.e.p.PluginsService     ] [wait-times] loaded module [lang-groovy]
+[2016-11-10T09:34:34,627][INFO ][o.e.p.PluginsService     ] [wait-times] loaded module [lang-mustache]
+[2016-11-10T09:34:34,628][INFO ][o.e.p.PluginsService     ] [wait-times] loaded module [lang-painless]
+[2016-11-10T09:34:34,629][INFO ][o.e.p.PluginsService     ] [wait-times] loaded module [percolator]
+[2016-11-10T09:34:34,630][INFO ][o.e.p.PluginsService     ] [wait-times] loaded module [reindex]
+[2016-11-10T09:34:34,631][INFO ][o.e.p.PluginsService     ] [wait-times] loaded module [transport-netty3]
+[2016-11-10T09:34:34,632][INFO ][o.e.p.PluginsService     ] [wait-times] loaded module [transport-netty4]
+[2016-11-10T09:34:34,633][INFO ][o.e.p.PluginsService     ] [wait-times] no plugins loaded
+[2016-11-10T09:34:39,244][INFO ][o.e.n.Node               ] [wait-times] initialized
+[2016-11-10T09:34:39,246][INFO ][o.e.n.Node               ] [wait-times] starting ...
+[2016-11-10T09:34:39,563][INFO ][o.e.t.TransportService   ] [wait-times] publish_address {127.0.0.1:9300}, bound_addresses {[::1]:9300}, {127.0.0.1:9300}
+[2016-11-10T09:34:40,429][INFO ][o.e.m.j.JvmGcMonitorService] [wait-times] [gc][1] overhead, spent [311ms] collecting in the last [1.1s]
+[2016-11-10T09:34:42,796][INFO ][o.e.c.s.ClusterService   ] [wait-times] new_master {wait-times}{X3C-729WQO2MVy0TRTqwng}{Fk36AsgpRCC91Odmq1xswg}{127.0.0.1}{127.0.0.1:9300}, reason: zen-disco-elected-as-master ([0] nodes joined)
+[2016-11-10T09:34:42,884][INFO ][o.e.h.HttpServer         ] [wait-times] publish_address {127.0.0.1:9200}, bound_addresses {[::1]:9200}, {127.0.0.1:9200}
+[2016-11-10T09:34:42,897][INFO ][o.e.n.Node               ] [wait-times] started
+[2016-11-10T09:34:43,026][INFO ][o.e.g.GatewayService     ] [wait-times] recovered [0] indices into cluster_state
+[2016-11-10T09:46:00,649][WARN ][o.e.c.l.LogConfigurator  ] ignoring unsupported logging configuration file [/es/config/logging.yml], logging is configured via [/es/config/log4j2.properties]
+[2016-11-10T09:46:01,346][INFO ][o.e.n.Node               ] [wait-times] initializing ...
+[2016-11-10T09:46:01,672][INFO ][o.e.e.NodeEnvironment    ] [wait-times] using [1] data paths, mounts [[/elasticsearch-5.0.0/data (osxfs)]], net usable_space [351.8gb], net total_space [464.6gb], spins? [possibly], types [fuse.osxfs]
+[2016-11-10T09:46:01,673][INFO ][o.e.e.NodeEnvironment    ] [wait-times] heap size [1.9gb], compressed ordinary object pointers [true]
+[2016-11-10T09:46:01,693][INFO ][o.e.n.Node               ] [wait-times] version[5.0.0], pid[29], build[253032b/2016-10-26T04:37:51.531Z], OS[Linux/4.4.27-moby/amd64], JVM[Oracle Corporation/OpenJDK 64-Bit Server VM/1.8.0_111/25.111-b14]
+[2016-11-10T09:46:04,943][INFO ][o.e.p.PluginsService     ] [wait-times] loaded module [aggs-matrix-stats]
+[2016-11-10T09:46:04,944][INFO ][o.e.p.PluginsService     ] [wait-times] loaded module [ingest-common]
+[2016-11-10T09:46:04,945][INFO ][o.e.p.PluginsService     ] [wait-times] loaded module [lang-expression]
+[2016-11-10T09:46:04,946][INFO ][o.e.p.PluginsService     ] [wait-times] loaded module [lang-groovy]
+[2016-11-10T09:46:04,946][INFO ][o.e.p.PluginsService     ] [wait-times] loaded module [lang-mustache]
+[2016-11-10T09:46:04,947][INFO ][o.e.p.PluginsService     ] [wait-times] loaded module [lang-painless]
+[2016-11-10T09:46:04,948][INFO ][o.e.p.PluginsService     ] [wait-times] loaded module [percolator]
+[2016-11-10T09:46:04,948][INFO ][o.e.p.PluginsService     ] [wait-times] loaded module [reindex]
+[2016-11-10T09:46:04,949][INFO ][o.e.p.PluginsService     ] [wait-times] loaded module [transport-netty3]
+[2016-11-10T09:46:04,950][INFO ][o.e.p.PluginsService     ] [wait-times] loaded module [transport-netty4]
+[2016-11-10T09:46:04,951][INFO ][o.e.p.PluginsService     ] [wait-times] no plugins loaded
+[2016-11-10T09:46:09,724][INFO ][o.e.n.Node               ] [wait-times] initialized
+[2016-11-10T09:46:09,725][INFO ][o.e.n.Node               ] [wait-times] starting ...
+[2016-11-10T09:46:10,180][INFO ][o.e.t.TransportService   ] [wait-times] publish_address {127.0.0.1:9300}, bound_addresses {[::1]:9300}, {127.0.0.1:9300}
+[2016-11-10T09:46:10,901][INFO ][o.e.m.j.JvmGcMonitorService] [wait-times] [gc][1] overhead, spent [429ms] collecting in the last [1.1s]
+[2016-11-10T09:46:13,333][INFO ][o.e.c.s.ClusterService   ] [wait-times] new_master {wait-times}{X3C-729WQO2MVy0TRTqwng}{pfZ5_e9URXWUH38SUlm62A}{127.0.0.1}{127.0.0.1:9300}, reason: zen-disco-elected-as-master ([0] nodes joined)
+[2016-11-10T09:46:13,393][INFO ][o.e.h.HttpServer         ] [wait-times] publish_address {127.0.0.1:9200}, bound_addresses {[::1]:9200}, {127.0.0.1:9200}
+[2016-11-10T09:46:13,397][INFO ][o.e.n.Node               ] [wait-times] started
+[2016-11-10T09:46:13,432][INFO ][o.e.g.GatewayService     ] [wait-times] recovered [0] indices into cluster_state
+[2016-11-10T10:09:39,793][WARN ][o.e.c.l.LogConfigurator  ] ignoring unsupported logging configuration file [/es/config/logging.yml], logging is configured via [/es/config/log4j2.properties]
+[2016-11-10T10:09:39,977][ERROR][o.e.b.Bootstrap          ] Exception
+java.lang.RuntimeException: can not run elasticsearch as root
+	at org.elasticsearch.bootstrap.Bootstrap.initializeNatives(Bootstrap.java:96) ~[elasticsearch-5.0.0.jar:5.0.0]
+	at org.elasticsearch.bootstrap.Bootstrap.setup(Bootstrap.java:155) ~[elasticsearch-5.0.0.jar:5.0.0]
+	at org.elasticsearch.bootstrap.Bootstrap.init(Bootstrap.java:286) [elasticsearch-5.0.0.jar:5.0.0]
+	at org.elasticsearch.bootstrap.Elasticsearch.init(Elasticsearch.java:112) [elasticsearch-5.0.0.jar:5.0.0]
+	at org.elasticsearch.bootstrap.Elasticsearch.execute(Elasticsearch.java:103) [elasticsearch-5.0.0.jar:5.0.0]
+	at org.elasticsearch.cli.SettingCommand.execute(SettingCommand.java:54) [elasticsearch-5.0.0.jar:5.0.0]
+	at org.elasticsearch.cli.Command.mainWithoutErrorHandling(Command.java:96) [elasticsearch-5.0.0.jar:5.0.0]
+	at org.elasticsearch.cli.Command.main(Command.java:62) [elasticsearch-5.0.0.jar:5.0.0]
+	at org.elasticsearch.bootstrap.Elasticsearch.main(Elasticsearch.java:80) [elasticsearch-5.0.0.jar:5.0.0]
+	at org.elasticsearch.bootstrap.Elasticsearch.main(Elasticsearch.java:73) [elasticsearch-5.0.0.jar:5.0.0]
+[2016-11-10T10:09:39,997][WARN ][o.e.b.ElasticsearchUncaughtExceptionHandler] [wait-times] uncaught exception in thread [main]
+org.elasticsearch.bootstrap.StartupException: java.lang.RuntimeException: can not run elasticsearch as root
+	at org.elasticsearch.bootstrap.Elasticsearch.init(Elasticsearch.java:116) ~[elasticsearch-5.0.0.jar:5.0.0]
+	at org.elasticsearch.bootstrap.Elasticsearch.execute(Elasticsearch.java:103) ~[elasticsearch-5.0.0.jar:5.0.0]
+	at org.elasticsearch.cli.SettingCommand.execute(SettingCommand.java:54) ~[elasticsearch-5.0.0.jar:5.0.0]
+	at org.elasticsearch.cli.Command.mainWithoutErrorHandling(Command.java:96) ~[elasticsearch-5.0.0.jar:5.0.0]
+	at org.elasticsearch.cli.Command.main(Command.java:62) ~[elasticsearch-5.0.0.jar:5.0.0]
+	at org.elasticsearch.bootstrap.Elasticsearch.main(Elasticsearch.java:80) ~[elasticsearch-5.0.0.jar:5.0.0]
+	at org.elasticsearch.bootstrap.Elasticsearch.main(Elasticsearch.java:73) ~[elasticsearch-5.0.0.jar:5.0.0]
+Caused by: java.lang.RuntimeException: can not run elasticsearch as root
+	at org.elasticsearch.bootstrap.Bootstrap.initializeNatives(Bootstrap.java:96) ~[elasticsearch-5.0.0.jar:5.0.0]
+	at org.elasticsearch.bootstrap.Bootstrap.setup(Bootstrap.java:155) ~[elasticsearch-5.0.0.jar:5.0.0]
+	at org.elasticsearch.bootstrap.Bootstrap.init(Bootstrap.java:286) ~[elasticsearch-5.0.0.jar:5.0.0]
+	at org.elasticsearch.bootstrap.Elasticsearch.init(Elasticsearch.java:112) ~[elasticsearch-5.0.0.jar:5.0.0]
+	... 6 more
+[2016-11-10T10:10:05,662][WARN ][o.e.c.l.LogConfigurator  ] ignoring unsupported logging configuration file [/es/config/logging.yml], logging is configured via [/es/config/log4j2.properties]
+[2016-11-10T10:10:06,291][INFO ][o.e.n.Node               ] [wait-times] initializing ...
+[2016-11-10T10:10:06,497][INFO ][o.e.e.NodeEnvironment    ] [wait-times] using [1] data paths, mounts [[/elasticsearch-5.0.0/data (osxfs)]], net usable_space [367gb], net total_space [464.6gb], spins? [possibly], types [fuse.osxfs]
+[2016-11-10T10:10:06,498][INFO ][o.e.e.NodeEnvironment    ] [wait-times] heap size [1.9gb], compressed ordinary object pointers [true]
+[2016-11-10T10:10:06,515][INFO ][o.e.n.Node               ] [wait-times] version[5.0.0], pid[50], build[253032b/2016-10-26T04:37:51.531Z], OS[Linux/4.4.27-moby/amd64], JVM[Oracle Corporation/OpenJDK 64-Bit Server VM/1.8.0_111/25.111-b14]
+[2016-11-10T10:10:09,892][INFO ][o.e.p.PluginsService     ] [wait-times] loaded module [aggs-matrix-stats]
+[2016-11-10T10:10:09,893][INFO ][o.e.p.PluginsService     ] [wait-times] loaded module [ingest-common]
+[2016-11-10T10:10:09,894][INFO ][o.e.p.PluginsService     ] [wait-times] loaded module [lang-expression]
+[2016-11-10T10:10:09,896][INFO ][o.e.p.PluginsService     ] [wait-times] loaded module [lang-groovy]
+[2016-11-10T10:10:09,898][INFO ][o.e.p.PluginsService     ] [wait-times] loaded module [lang-mustache]
+[2016-11-10T10:10:09,899][INFO ][o.e.p.PluginsService     ] [wait-times] loaded module [lang-painless]
+[2016-11-10T10:10:09,901][INFO ][o.e.p.PluginsService     ] [wait-times] loaded module [percolator]
+[2016-11-10T10:10:09,904][INFO ][o.e.p.PluginsService     ] [wait-times] loaded module [reindex]
+[2016-11-10T10:10:09,907][INFO ][o.e.p.PluginsService     ] [wait-times] loaded module [transport-netty3]
+[2016-11-10T10:10:09,908][INFO ][o.e.p.PluginsService     ] [wait-times] loaded module [transport-netty4]
+[2016-11-10T10:10:09,910][INFO ][o.e.p.PluginsService     ] [wait-times] no plugins loaded
+[2016-11-10T10:10:17,253][INFO ][o.e.n.Node               ] [wait-times] initialized
+[2016-11-10T10:10:17,255][INFO ][o.e.n.Node               ] [wait-times] starting ...
+[2016-11-10T10:10:17,556][INFO ][o.e.t.TransportService   ] [wait-times] publish_address {127.0.0.1:9300}, bound_addresses {[::1]:9300}, {127.0.0.1:9300}
+[2016-11-10T10:10:18,342][INFO ][o.e.m.j.JvmGcMonitorService] [wait-times] [gc][1] overhead, spent [444ms] collecting in the last [1s]
+[2016-11-10T10:10:20,791][INFO ][o.e.c.s.ClusterService   ] [wait-times] new_master {wait-times}{X3C-729WQO2MVy0TRTqwng}{87RMKYbuTYGdvnlZ9Z6X6A}{127.0.0.1}{127.0.0.1:9300}, reason: zen-disco-elected-as-master ([0] nodes joined)
+[2016-11-10T10:10:20,871][INFO ][o.e.h.HttpServer         ] [wait-times] publish_address {127.0.0.1:9200}, bound_addresses {[::1]:9200}, {127.0.0.1:9200}
+[2016-11-10T10:10:20,876][INFO ][o.e.n.Node               ] [wait-times] started
+[2016-11-10T10:10:20,913][INFO ][o.e.g.GatewayService     ] [wait-times] recovered [0] indices into cluster_state

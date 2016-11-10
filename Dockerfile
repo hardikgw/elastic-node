@@ -17,4 +17,3 @@ RUN\
 RUN useradd -ms /bin/bash elastic &&\
 	su - elastic &&\
 	sudo chmod -R 777 /es
-EXPOSE 9200 9300
