@@ -13,7 +13,7 @@ RUN\
 	touch start.sh &&\
 	chmod 755 start.sh &&\
 	echo "#!/bin/sh" >> start.sh &&\
-	echo "su - elastic -c "/es/bin/elasticsearch"" >> start.sh
+	echo "su - elastic -c '/es/bin/elasticsearch -d'" >> start.sh
 RUN useradd -ms /bin/bash elastic &&\
 	su - elastic &&\
 	sudo chmod -R 777 /es
