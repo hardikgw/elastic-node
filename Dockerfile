@@ -4,7 +4,7 @@ ENV\
 	ES_VER=5.0.0
 RUN\ 
 	apt-get update &&\
-	apt-get install -y wget vim nodejs tar npm default-jdk &&\
+	apt-get install -y wget vim nodejs tar npm default-jdk sudo &&\
 	apt-get update &&\
 	wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-$ES_VER.tar.gz &&\
 	tar xzvf elasticsearch-$ES_VER.tar.gz &&\
@@ -13,7 +13,8 @@ RUN\
 	touch start.sh &&\
 	chmod 755 start.sh &&\
 	echo "#!/bin/sh" >> start.sh &&\
-	echo "./es/bin/elasticsearch -Des.insecure.allow.root=true -d" >> start.sh &&\
-	mkdir e-data &&\
-	mkdir n-data
+	echo "su - elastic -c "/es/bin/elasticsearch"" >> start.sh
+RUN useradd -ms /bin/bash elastic &&\
+	su - elastic &&\
+	sudo chmod -R 777 /es
 EXPOSE 9200 9300
