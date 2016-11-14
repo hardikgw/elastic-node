@@ -15,7 +15,25 @@ shinyUI(fluidPage(
     ),
     # Show a plot of the generated distribution
     mainPanel(
-      leafletOutput("airports")
+      leafletOutput("airports"),
+      br(),
+      plotOutput("histogram1"),
+      br(),
+      plotOutput("histogram2"),
+      br(),
+      plotOutput("scatterplot1"),
+      br(),
+      plotOutput("scatterplot2"),
+      br(),
+      plotOutput("boxplot1"),
+      br(),
+      plotOutput("boxplot2"),
+      br(),
+      plotOutput("boxplot3"),
+      br(),
+      plotOutput("boxplot5"),
+      br(),
+      plotOutput("boxplot6")
     )
   )
 ))
