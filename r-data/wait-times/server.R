@@ -30,25 +30,23 @@ shinyServer(function(input, output) {
   output$histogram1 <- renderPlot({ 
     wd <- subset(wtd, as.Date(Date) >= as.Date(input$date_range[1]) & as.Date(Date) <= as.Date(input$date_range[2]))
     wh <- subset(wth, as.Date(Date) >= as.Date(input$date_range[1]) & as.Date(Date) <= as.Date(input$date_range[2]))
-    p <- ggplot(wd, aes(x = AvgWait, fill = Airport)) +
+    ggplot(wd, aes(x = AvgWait, fill = Airport)) +
       geom_histogram(data = wd, fill = "grey", alpha = .5) +
       geom_histogram(colour = "black") +
       facet_wrap(~ Airport) +
       guides(fill = FALSE) +  # to remove the legend
       theme_bw()              # for clean look overall
-    print(p)
   })
   
   output$histogram2 <- renderPlot({ 
     wd <- subset(wtd, as.Date(Date) >= as.Date(input$date_range[1]) & as.Date(Date) <= as.Date(input$date_range[2]))
     wh <- subset(wth, as.Date(Date) >= as.Date(input$date_range[1]) & as.Date(Date) <= as.Date(input$date_range[2]))
-    p <- ggplot(wd, aes(x = MaxWait, fill = Airport)) +
+    ggplot(wd, aes(x = MaxWait, fill = Airport)) +
       geom_histogram(data = wd, fill = "grey", alpha = .5) +
       geom_histogram(colour = "black") +
       facet_wrap(~ Airport) +
       guides(fill = FALSE) +  # to remove the legend
       theme_bw()              # for clean look overall
-    print(p)
   })
   
   #### SCATTERPLOTS   #################################
@@ -56,30 +54,15 @@ shinyServer(function(input, output) {
   output$scatterplot1 <- renderPlot({ 
     wd <- subset(wtd, as.Date(Date) >= as.Date(input$date_range[1]) & as.Date(Date) <= as.Date(input$date_range[2]))
     wh <- subset(wth, as.Date(Date) >= as.Date(input$date_range[1]) & as.Date(Date) <= as.Date(input$date_range[2]))
-    p <- ggplot(wd, aes(x =Booths , y =AvgWait, colour = Airport)) +
+    ggplot(wd, aes(x =Booths , y =AvgWait, colour = Airport)) +
       geom_point(data = wd, colour = "grey", alpha = .2) +
       geom_point() + 
       facet_wrap(~ Airport) +
       guides(colour = FALSE) +
       theme_bw()
-    print(p)
   })
   
   output$scatterplot2 <- renderPlot({ 
-    wd <- subset(wtd, as.Date(Date) >= as.Date(input$date_range[1]) & as.Date(Date) <= as.Date(input$date_range[2]))
-    wh <- subset(wth, as.Date(Date) >= as.Date(input$date_range[1]) & as.Date(Date) <= as.Date(input$date_range[2]))
-    p <- ggplot(wd, aes(x =AvgWait , y =MaxWait, colour = Airport)) +
-      geom_point(data = wd, colour = "grey", alpha = .2) +
-      geom_point() + 
-      facet_wrap(~ Airport) +
-      guides(colour = FALSE) +
-      theme_bw()
-    print(p)
-  })
-  
-  #### BOXPLOTS   #################################
-  
-  output$boxplot1 <- renderPlot({ 
     wd <- subset(wtd, as.Date(Date) >= as.Date(input$date_range[1]) & as.Date(Date) <= as.Date(input$date_range[2]))
     wh <- subset(wth, as.Date(Date) >= as.Date(input$date_range[1]) & as.Date(Date) <= as.Date(input$date_range[2]))
     ggplot(wd, aes(x =AvgWait , y =MaxWait, colour = Airport)) +
@@ -90,13 +73,22 @@ shinyServer(function(input, output) {
       theme_bw()
   })
   
+  #### BOXPLOTS   #################################
+  
+  output$boxplot1 <- renderPlot({ 
+    wd <- subset(wtd, as.Date(Date) >= as.Date(input$date_range[1]) & as.Date(Date) <= as.Date(input$date_range[2]))
+    wh <- subset(wth, as.Date(Date) >= as.Date(input$date_range[1]) & as.Date(Date) <= as.Date(input$date_range[2]))
+    ggplot(wd, aes(factor(Airport), AvgWait)) +
+    geom_boxplot() + geom_jitter() + 
+    geom_boxplot(aes(fill = factor(Airport)))
+  })
+  
   output$boxplot2 <- renderPlot({ 
     wd <- subset(wtd, as.Date(Date) >= as.Date(input$date_range[1]) & as.Date(Date) <= as.Date(input$date_range[2]))
     wh <- subset(wth, as.Date(Date) >= as.Date(input$date_range[1]) & as.Date(Date) <= as.Date(input$date_range[2]))
-    p <- p <- ggplot(wd, aes(factor(Airport), AvgWait))
-    p + geom_boxplot() + geom_jitter()
-    p + geom_boxplot(aes(fill = factor(Airport)))
-    print(p)
+    ggplot(wd, aes(factor(Airport), AvgWait)) +
+    geom_boxplot() + geom_jitter() +
+    geom_boxplot(aes(fill = factor(Airport)))
   })
   
   output$boxplot3 <- renderPlot({ 
