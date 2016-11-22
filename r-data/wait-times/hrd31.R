@@ -8,7 +8,14 @@ wd<-read.table(file='WaitTimesPerDay.csv',sep=',',header=TRUE)
 attach(wd)
 names(wd)
 
-
+g <- ggplot(wh, aes(x = AvgWait, y= Count)) + geom_point(aes(color=Hour)) + facet_wrap(~ Airport)
+g
+ggplot(wh, aes(x = AvgWait, y= Count, fill = Airport)) +
+  geom_histogram(data = wd, fill = "grey", alpha = .5) +
+  geom_histogram(colour = "black") +
+  facet_wrap(~ Airport) +
+  guides(fill = FALSE) +  # to remove the legend
+  theme_bw()     
 
 ##### EXAMPLE OF HISTOGRAMS  ###############################
 

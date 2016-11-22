@@ -23,28 +23,28 @@ wtd <- read.csv(
   )
 )
 
-# wth <- read.csv(
-#   file = "WaitTimesPerHour.csv",
-#   header = TRUE,
-#   sep = ","
-#   ,
-#   colClasses = c(
-#     "character",
-#     "numeric",
-#     "character",
-#     "character" ,
-#     "numeric",
-#     "numeric",
-#     "numeric",
-#     "numeric",
-#     "numeric",
-#     "numeric"
-#   )
-# )
+wth <- read.csv(
+  file = "WaitTimesPerHour.csv",
+  header = TRUE,
+  sep = ","
+  ,
+  colClasses = c(
+    "character",
+    "numeric",
+    "character",
+    "character" ,
+    "numeric",
+    "numeric",
+    "numeric",
+    "numeric",
+    "numeric",
+    "numeric"
+  )
+)
 
 
 wtd$Date <- as.Date(wtd$Date, format = "%m/%d/%y")
-# wth$Date <- as.Date(wth$Date, format = "%m/%d/%y")
+wth$Date <- as.Date(wth$Date, format = "%m/%d/%y")
 
 shinyServer(function(input, output) {
   currentFib         <- reactive({
@@ -58,13 +58,14 @@ shinyServer(function(input, output) {
         as.Date(Date) <= as.Date(input$date_range[2])
     )
   })
-  # wh <- reactive({
-  #   subset(
-  #     wth,
-  #     as.Date(Date) >= as.Date(input$date_range[1]) &
-  #       as.Date(Date) <= as.Date(input$date_range[2])
-  #   )
-  # })
+  
+  wh <- reactive({
+    subset(
+      wth,
+      as.Date(Date) >= as.Date(input$date_range[1]) &
+        as.Date(Date) <= as.Date(input$date_range[2])
+    )
+  })
   
   
   output$airports <- renderLeaflet({
@@ -113,6 +114,11 @@ shinyServer(function(input, output) {
       guides(colour = FALSE) +
       theme_bw()
   })
+  
+  output$scatterplot2 <- renderPlot({
+    ggplot(wh(), aes(x = AvgWait, y= Count)) +
+    geom_point(aes(color=Hour)) + 
+    facet_wrap(~ Airport)})
   
   # output$scatterplot2 <- renderPlot({
   #   ggplot(wd(), aes(x = AvgWait , y = MaxWait, colour = Airport)) +
