@@ -23,28 +23,28 @@ wtd <- read.csv(
   )
 )
 
-wth <- read.csv(
-  file = "WaitTimesPerHour.csv",
-  header = TRUE,
-  sep = ","
-  ,
-  colClasses = c(
-    "character",
-    "numeric",
-    "character",
-    "character" ,
-    "numeric",
-    "numeric",
-    "numeric",
-    "numeric",
-    "numeric",
-    "numeric"
-  )
-)
+# wth <- read.csv(
+#   file = "WaitTimesPerHour.csv",
+#   header = TRUE,
+#   sep = ","
+#   ,
+#   colClasses = c(
+#     "character",
+#     "numeric",
+#     "character",
+#     "character" ,
+#     "numeric",
+#     "numeric",
+#     "numeric",
+#     "numeric",
+#     "numeric",
+#     "numeric"
+#   )
+# )
 
 
 wtd$Date <- as.Date(wtd$Date, format = "%m/%d/%y")
-wth$Date <- as.Date(wth$Date, format = "%m/%d/%y")
+# wth$Date <- as.Date(wth$Date, format = "%m/%d/%y")
 
 shinyServer(function(input, output) {
   currentFib         <- reactive({
@@ -58,13 +58,13 @@ shinyServer(function(input, output) {
         as.Date(Date) <= as.Date(input$date_range[2])
     )
   })
-  wh <- reactive({
-    subset(
-      wth,
-      as.Date(Date) >= as.Date(input$date_range[1]) &
-        as.Date(Date) <= as.Date(input$date_range[2])
-    )
-  })
+  # wh <- reactive({
+  #   subset(
+  #     wth,
+  #     as.Date(Date) >= as.Date(input$date_range[1]) &
+  #       as.Date(Date) <= as.Date(input$date_range[2])
+  #   )
+  # })
   
   
   output$airports <- renderLeaflet({
@@ -73,7 +73,7 @@ shinyServer(function(input, output) {
         lng = ~ Lon,
         lat = ~ Lat,
         weight = 1,
-        radius = ~ Count / 2 * 20,
+        radius = ~ (AvgWait ^ 2) * 20,
         popup = ~ Airport
       )
   })
@@ -91,7 +91,7 @@ shinyServer(function(input, output) {
   })
   
   output$histogram2 <- renderPlot({
-    ggplot(wd(), aes(x = MaxWait, fill = Airport)) +
+    ggplot(wd(), aes(x = Count, fill = Airport)) +
       geom_histogram(data = wd(),
                      fill = "grey",
                      alpha = .5) +
@@ -114,16 +114,16 @@ shinyServer(function(input, output) {
       theme_bw()
   })
   
-  output$scatterplot2 <- renderPlot({
-    ggplot(wd(), aes(x = AvgWait , y = MaxWait, colour = Airport)) +
-      geom_point(data = wd(),
-                 colour = "grey",
-                 alpha = .2) +
-      geom_point() +
-      facet_wrap( ~ Airport) +
-      guides(colour = FALSE) +
-      theme_bw()
-  })
+  # output$scatterplot2 <- renderPlot({
+  #   ggplot(wd(), aes(x = AvgWait , y = MaxWait, colour = Airport)) +
+  #     geom_point(data = wd(),
+  #                colour = "grey",
+  #                alpha = .2) +
+  #     geom_point() +
+  #     facet_wrap( ~ Airport) +
+  #     guides(colour = FALSE) +
+  #     theme_bw()
+  # })
   
   #### BOXPLOTS   #################################
   
@@ -139,17 +139,17 @@ shinyServer(function(input, output) {
       geom_boxplot(aes(fill = factor(Airport)))
   })
   
-  output$boxplot3 <- renderPlot({
-    ggplot(wh(), aes(factor(Airport), AvgWait)) +
-      geom_boxplot() + geom_jitter() +
-      geom_boxplot(aes(fill = factor(Airport)))
-  })
+  # output$boxplot3 <- renderPlot({
+  #   ggplot(wh(), aes(factor(Airport), AvgWait)) +
+  #     geom_boxplot() + geom_jitter() +
+  #     geom_boxplot(aes(fill = factor(Airport)))
+  # })
   
-  output$boxplot4 <- renderPlot({
-    ggplot(wh(), aes(factor(Airport), MaxWait)) +
-      geom_boxplot() + geom_jitter() +
-      geom_boxplot(aes(fill = factor(Airport)))
-  })
+  # output$boxplot4 <- renderPlot({
+  #   ggplot(wh(), aes(factor(Airport), MaxWait)) +
+  #     geom_boxplot() + geom_jitter() +
+  #     geom_boxplot(aes(fill = factor(Airport)))
+  # })
   
   #### DENSITYPLOTS   #################################
   
@@ -162,11 +162,11 @@ shinyServer(function(input, output) {
   })
   
   output$densityplot3 <- renderPlot({
-    ggplot(wh(), aes(x = AvgWait, fill = Airport)) + geom_density(alpha = 0.3)
+    ggplot(wd(), aes(x = Booths, fill = Airport)) + geom_density(alpha = 0.3)
   })
-  
-  output$densityplot4 <- renderPlot({
-    ggplot(wh(), aes(x = MaxWait, fill = Airport)) + geom_density(alpha = 0.3)
-  })
+  # 
+  # output$densityplot4 <- renderPlot({
+  #   ggplot(wh(), aes(x = MaxWait, fill = Airport)) + geom_density(alpha = 0.3)
+  # })
   
 })
