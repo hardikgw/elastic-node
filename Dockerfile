@@ -1,5 +1,6 @@
 FROM ubuntu
 MAINTAINER hpatel@channelit.biz
+USER root
 ENV\
 	ES_VER=5.0.0
 RUN\ 
