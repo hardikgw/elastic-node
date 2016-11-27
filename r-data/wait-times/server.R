@@ -9,37 +9,12 @@ wtd <- read.csv(
   file = "WaitTimesPerDay.csv",
   header = TRUE,
   sep = ","
-  ,
-  colClasses = c(
-    "character",
-    "numeric",
-    "character",
-    "numeric",
-    "numeric",
-    "numeric",
-    "numeric",
-    "numeric",
-    "numeric"
-  )
 )
 
 wth <- read.csv(
   file = "WaitTimesPerHour.csv",
   header = TRUE,
   sep = ","
-  ,
-  colClasses = c(
-    "character",
-    "numeric",
-    "character",
-    "character" ,
-    "numeric",
-    "numeric",
-    "numeric",
-    "numeric",
-    "numeric",
-    "numeric"
-  )
 )
 
 
