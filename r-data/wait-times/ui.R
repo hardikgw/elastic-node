@@ -55,6 +55,28 @@ shinyUI(
                  )
                )
              ))),
+    tabPanel("Data Analysis",
+             fluidRow(column(
+               10,
+               offset = 2,
+               sliderInput(
+                 "date_range",
+                 "Choose Date Range:",
+                 min = as.Date("2015-11-06"),
+                 max = Sys.Date(),
+                 width = '80%',
+                 value = c(as.Date("2016-02-25"), Sys.Date())
+               )
+             )),
+             fluidRow(column(
+               10,
+               offset = 1,
+               tabsetPanel(
+                 tabPanel("Corr By Hour", plotOutput("cp")),
+                 tabPanel("Principal Component", plotOutput("pca")),
+                 tabPanel("Regression Charts", plotOutput("rc"))
+               )
+             ))),
     tabPanel("Architecture",
              fluidRow(
                column(

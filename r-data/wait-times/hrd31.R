@@ -1,4 +1,5 @@
 library(ggplot2)
+library(rgl)
 
 wh<-read.table(file='WaitTimesPerHour.csv',sep=',',header=TRUE)
 attach(wh)
@@ -82,4 +83,58 @@ ggplot(wh, aes(x=AvgWait, fill=Airport)) + geom_density(alpha=0.3)
 
 ggplot(wh, aes(x=MaxWait, fill=Airport)) + geom_density(alpha=0.3)
 
+######## FINAL
+
+library(corrplot)
+whn<-read.table(file='WaitTimesPerHour.csv',sep=',',header=TRUE)
+attach(whn)
+names(whn)
+
+
+## Correlation plots by day
+wdn<-read.table(file='WaitTimesPerDay.csv',sep=',',header=TRUE)
+attach(wdn)
+names(wdn)
+
+
+wdn1<-cbind(wdn[,1:7],wdn[,9])
+pairs(wdn1)
+
+cbd<-cor(wdn1)
+corrplot(cbd)
+
+## Correlation plots by hour
+wdh<-read.table(file='WaitTimesPerHour.csv',sep=',',header=TRUE)
+attach(wdh)
+names(wdh)
+
+
+wdh1<-cbind(wdh[,1:7],wdh[,9])
+pairs(wdh1)
+
+cbh<-cor(wdh1)
+corrplot(cbh)
+# how big and dark blue, there is no -ve correlation 
+
+library(car) 
+scatterplotMatrix(~AvgWait+Count+Booths|Airport, data=wd,main="Scatterplots and regression lines per airport") 
+
+pc1<-prcomp(wdh1)
+
+library(scatterplot3d) 
+
+# plot the first, second, and third principal components 
+s3d = scatterplot3d(pc1$rotation[,1], pc1$rotation[,2], pc1$rotation[,3], 
+                    xlab='Comp.1', ylab='Comp.2', zlab='Comp.3', pch = 20)
+
+
+
+#smooth regression line, correlation +ve correlation between booths and count
+# not very informative because of lot of data
+
+# Booths and AvgWait not clear relationship because line looks like close to horizontal
+
+plot(pc1) # amount of variation
+
+biplot(pc1)
 

@@ -1,17 +1,19 @@
 
-
 library(shiny)
 library(leaflet)
 library(maps)
 library(ggplot2)
+library(car) 
+library(corrplot)
+library(scatterplot3d) 
 
-wtd <- read.csv(
+wtd <- read.table(
   file = "WaitTimesPerDay.csv",
   header = TRUE,
   sep = ","
 )
 
-wth <- read.csv(
+wth <- read.table(
   file = "WaitTimesPerHour.csv",
   header = TRUE,
   sep = ","
@@ -149,5 +151,18 @@ shinyServer(function(input, output) {
   # output$densityplot4 <- renderPlot({
   #   ggplot(wh(), aes(x = MaxWait, fill = Airport)) + geom_density(alpha = 0.3)
   # })
-  
+  output$cp <- renderPlot({
+    wdh1<-cbind(wth[,1:7],wth[,9])
+    cbh<-cor(wdh1)
+    corrplot(cbh)
+  })
+  output$pca <- renderPlot({
+    wdn1<-cbind(wtd[,1:7],wtd[,9])
+    pc1<-prcomp(wdn1)
+    scatterplot3d(pc1$rotation[,1], pc1$rotation[,2], pc1$rotation[,3], 
+                        xlab='Comp.1', ylab='Comp.2', zlab='Comp.3', pch = 20)
+  })
+  output$rc <- renderPlot({
+    scatterplotMatrix(~AvgWait+Count+Booths|Airport, data=wtd,main="Scatterplots and regression lines per airport") 
+  })
 })
