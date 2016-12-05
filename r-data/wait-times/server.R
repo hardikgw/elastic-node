@@ -7,26 +7,16 @@ library(car)
 library(corrplot)
 library(scatterplot3d) 
 
-wtd <- read.table(
-  file = "WaitTimesPerDay.csv",
-  header = TRUE,
-  sep = ","
+defaultColors <- c("#3366cc", "#dc3912", "#ff9900", "#109618", "#990099", "#0099c6", "#dd4477",
+                   "#66AA00", "#B82E2E", "#316395", "#994499", "#22AA99", "#AAAA11", "#6633CC",
+                   "#E67300", "#8B0707", "#329262", "#5574A6", "#3B3EAC", "#5bc0de", "#5cb85c",
+                   "#E9967A", "#FFFACD", "#ff9900", "#90EE90", "#DDA0DD")
+
+series <- structure(
+  lapply(defaultColors, function(color) { list(color=color) }),
+  names = levels(wtd$Airport)
 )
-
-wth <- read.table(
-  file = "WaitTimesPerHour.csv",
-  header = TRUE,
-  sep = ","
-)
-
-
-wtd$Date <- as.Date(wtd$Date, format = "%m/%d/%y")
-wth$Date <- as.Date(wth$Date, format = "%m/%d/%y")
-
 shinyServer(function(input, output) {
-  currentFib         <- reactive({
-    fib(as.numeric(input$n))
-  })
   
   wd <- reactive({
     subset(
@@ -34,6 +24,10 @@ shinyServer(function(input, output) {
       as.Date(Date) >= as.Date(input$date_range[1]) &
         as.Date(Date) <= as.Date(input$date_range[2])
     )
+  })
+  
+  wdc <- reactive({
+    subset(wtd,as.Date(Date) == as.Date(input$chart_range),select=c(Airport,AvgWait,Booths,Airport,Count))[order(subset(wtd,as.Date(Date) == as.Date(input$chart_range))$Airport),]
   })
   
   wh <- reactive({
@@ -164,5 +158,17 @@ shinyServer(function(input, output) {
   })
   output$rc <- renderPlot({
     scatterplotMatrix(~AvgWait+Count+Booths|Airport, data=wtd,main="Scatterplots and regression lines per airport") 
+  })
+  
+  output$g <- reactive({
+    list(
+      data = googleDataTable(wdc()),
+      options = list(
+        title = sprintf(
+          "Wait Times vs Number of Passengers",
+          input$Date),
+        series = series
+      )
+    )
   })
 })

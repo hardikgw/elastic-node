@@ -1,22 +1,37 @@
+if("package:googleCharts" %in% search()) detach("package:googleCharts", unload=TRUE)
 library(shiny)
+column2 = column
 library (leaflet)
+library(googleCharts)
+
+xlim <- list(
+  min = min(wtd$AvgWait),
+  max = max(wtd$AvgWait)
+)
+ylim <- list(
+  min = min(wtd$Booths),
+  max = max(wtd$Booths) + 3
+)
+
 shinyUI(
   navbarPage(
+    googleChartsInit(),
     "United States Airport Wait Times",
     tabPanel("Plots",
-             fluidRow(column(
+             fluidRow(column2(
                10,
                offset = 2,
                sliderInput(
                  "date_range",
                  "Choose Date Range:",
-                 min = as.Date("2015-11-06"),
-                 max = Sys.Date(),
+                 min = min(wtd$Date),
+                 max = max(wtd$Date),
                  width = '80%',
-                 value = c(as.Date("2016-02-25"), Sys.Date())
+                 value = c(min(wtd$Date),  min(wtd$Date) + 14),
+                 animate = animationOptions(interval=5000)
                )
              )),
-             fluidRow(column(
+             fluidRow(column2(
                10,
                offset = 1,
                tabsetPanel(
@@ -56,30 +71,77 @@ shinyUI(
                )
              ))),
     tabPanel("Data Analysis",
-             fluidRow(column(
+             fluidRow(column2(
                10,
                offset = 2,
                sliderInput(
-                 "date_range",
+                 "chart_range",
                  "Choose Date Range:",
-                 min = as.Date("2015-11-06"),
-                 max = Sys.Date(),
+                 min = min(wtd$Date),
+                 max = max(wtd$Date),
                  width = '80%',
-                 value = c(as.Date("2016-02-25"), Sys.Date())
+                 value = c(min(wtd$Date)),
+                 animate = animationOptions(interval=500)
                )
              )),
-             fluidRow(column(
+             fluidRow(column2(
                10,
                offset = 1,
                tabsetPanel(
                  tabPanel("Corr By Hour", plotOutput("cp")),
                  tabPanel("Principal Component", plotOutput("pca")),
-                 tabPanel("Regression Charts", plotOutput("rc"))
+                 tabPanel("Regression Charts", plotOutput("rc")),
+                 tabPanel("Animation", 
+                          
+                          googleBubbleChart("g",
+                                            width="100%", height = "475px",
+                                            # Set the default options for this chart; they can be
+                                            # overridden in server.R on a per-update basis. See
+                                            # https://developers.google.com/chart/interactive/docs/gallery/bubblechart
+                                            # for option documentation.
+                                            options = list(
+                                              fontSize = 13,
+                                              hAxis = list(
+                                                title = "Wait Time in Minutes",
+                                                viewWindow = xlim
+                                              ),
+                                              vAxis = list(
+                                                title = "Number of Passengers",
+                                                viewWindow = ylim
+                                              ),
+                                              # The default padding is a little too spaced out
+                                              chartArea = list(
+                                                top = 50, left = 75,
+                                                height = "75%", width = "75%"
+                                              ),
+                                              # Allow pan/zoom
+                                              explorer = list(),
+                                              # Set bubble visual props
+                                              bubble = list(
+                                                opacity = 0.4, stroke = "none",
+                                                # Hide bubble label
+                                                textStyle = list(
+                                                  color = "none"
+                                                )
+                                              ),
+                                              # Set fonts
+                                              titleTextStyle = list(
+                                                fontSize = 16
+                                              ),
+                                              tooltip = list(
+                                                textStyle = list(
+                                                  fontSize = 12
+                                                )
+                                              )
+                                            )
+                          )
+                          
+                          )
                )
              ))),
     tabPanel("Architecture",
              fluidRow(
-               column(
+               column2(
                  4,
                  offset = 1,
                  h3("Tools"),
@@ -101,7 +163,7 @@ shinyUI(
                          tags$li("AWS")),
                  br()
                ),
-               column(
+               column2(
                  4,
                  offset = 1,
                  h3("Process"),
@@ -114,7 +176,7 @@ shinyUI(
                )
              )),
     tabPanel("Background",
-             fluidRow(column(
+             fluidRow(column2(
                8,
                offset = 2,
                h3("Inspiration"),
@@ -140,7 +202,7 @@ shinyUI(
                p("* ", tags$a(href = "http://awt.cbp.gov/", "Airport Wait Times"))
              ))),
     tabPanel("TODO",
-             fluidRow(column(
+             fluidRow(column2(
                8,
                offset = 2,
                tags$ul(
