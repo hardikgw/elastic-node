@@ -205,7 +205,12 @@ shinyUI(
                  "* ",
                  tags$a(href = "https://bwt.cbp.gov/index.html", "CBP Wait Times")
                ),
-               p("* ", tags$a(href = "http://awt.cbp.gov/", "Airport Wait Times"))
+               p("* ", tags$a(href = "http://awt.cbp.gov/", "Airport Wait Times")),
+               br(),
+               h3("Source Code"),
+               p("* ", tags$a(href = "https://github.com/hardikgw/elastic-node/tree/master/r-data/wait-times", "Data and R code on Github")),
+               p("* ", tags$a(href = "https://github.com/hardikgw/cbp-wait-times", "Elastic Search data ingestion and aggregation")),
+               p("* ", tags$a(href = "https://hub.docker.com/r/channelit/shiny-loaded/", "Shiny Docker Image built from source"))
              ))),
     tabPanel("TODO",
              fluidRow(column2(

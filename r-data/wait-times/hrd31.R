@@ -173,7 +173,7 @@ hwtl + facet_grid(. ~ Airport)
 
 hwtl + facet_wrap( ~ Airport, nrow=2, scales = "free_y")
 hwtl
-
+fgi <- hourwt[hourwt[,1]=="GUM" | hourwt[,1]=="FAT" |hourwt[,1]=="FLL" | hourwt[,1]=="IAD" ,]
 
 ### gradient colour on AvgWait values
 
