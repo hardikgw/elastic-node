@@ -97,7 +97,7 @@ shinyUI(
                  tabPanel("Kernel", plotOutput(outputId="kd",width = "100%")),
                  tabPanel("Kernel", plotOutput(outputId="ka",width = "100%")),
                  tabPanel("Max-Avg", plotOutput(outputId="am",width = "100%")),
-                 tabPanel("Averge", plotOutput(outputId="aw", width = "100%")),
+                 tabPanel("Avg", plotOutput(outputId="aw", width = "100%")),
                  tabPanel("Animation", 
                           
                           googleBubbleChart("g",
@@ -113,7 +113,7 @@ shinyUI(
                                                 viewWindow = xlim
                                               ),
                                               vAxis = list(
-                                                title = "Number of Passengers",
+                                                title = "Number of Booths",
                                                 viewWindow = ylim
                                               ),
                                               # The default padding is a little too spaced out

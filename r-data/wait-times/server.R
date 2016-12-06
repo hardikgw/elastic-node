@@ -204,7 +204,7 @@ shinyServer(function(input, output) {
     geom_boxplot(width=0.1, outlier.shape = 19, outlier.colour="black", notch = FALSE,notchwidth = .5, alpha = 0.5, colour = "black")+
     labs(y = "Average Wait", x = "Hour") +
     facet_wrap( ~ Airport, ncol=2) 
-  },height = 3800,width = 1200)
+  },height = 3800)
   
   output$ka <- renderPlot({
     hourwt <- whc()
@@ -224,12 +224,12 @@ shinyServer(function(input, output) {
     ggplot(whc(), aes(x=Hour, y=AvgWait, color = AvgWait))+geom_point()+
     scale_color_gradientn(colours=c("blue","green","red"), values = c(0, 0.3, 1)) +
     facet_wrap( ~ Airport, ncol=3)
-  },height = 1500,width = 1200)
+  },height = 1500)
   
   output$am <- renderPlot({
     ggplot(whc(), aes(x=Hour, y=AvgWait, color = MaxWait))+geom_point() +
     scale_color_gradientn(colours=c("blue","green","red"), values = c(0, 0.3, 1)) +
     facet_wrap( ~ Airport, ncol=3)
-  },height = 1500,width = 1200)
+  },height = 1500)
   
 })
