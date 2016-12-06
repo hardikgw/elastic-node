@@ -138,3 +138,59 @@ plot(pc1) # amount of variation
 
 biplot(pc1)
 
+##### VIOLIN
+
+library(plyr)
+
+hwt <- ggplot(wh, aes(x=Hour, y=AvgWait))+geom_point(shape=19, color=rgb(0,0,1,0.3))
+hwt + facet_grid(. ~ Airport)
+hwt + facet_wrap( ~ Airport, ncol=3)
+hwt
+
+### VIO
+allvio <- ggplot(wh, aes(Hour, AvgWait, fill = Hour, colour = Hour))
+
+p2 <- allvio+geom_violin(alpha=0.3, size=0.7, width=0.7, trim = FALSE, scale = "width", adjust = 0.5) + 
+  geom_boxplot(width=0.1, outlier.shape = 19, outlier.colour="black", notch = FALSE, 
+               notchwidth = .5, alpha = 0.5, colour = "black")+
+  labs(y = "Average Wait", x = "Hour")
+
+p2 + facet_wrap( ~ Airport, ncol=6) # not a very pretty sight
+
+p2 <- p2+geom_violin(alpha=0.3, size=0.7, width=0.7, trim = FALSE, scale = "width", adjust = 0.5) + 
+  geom_boxplot(width=0.1, outlier.shape = 19, outlier.colour="black", notch = FALSE, 
+               notchwidth = .5, alpha = 0.5, colour = "black")+
+  labs(y = "Average Wait", x = "Hour")
+
+p2 + facet_wrap( ~ Airport, ncol=2) 
+
+# different range for y axis for the 4 airports
+p2 + facet_wrap( ~ Airport, ncol=2, scales = "free_y")
+
+hwtl <- ggplot(wh, aes(x=Hour, y=Count, color = Airport))+geom_line(size = 1)
+
+hwtl + facet_grid(. ~ Airport)
+
+hwtl + facet_wrap( ~ Airport, nrow=2, scales = "free_y")
+hwtl
+
+
+### gradient colour on AvgWait values
+
+hwt <- ggplot(wh, aes(x=Hour, y=AvgWait, color = AvgWait))+geom_point()+
+  scale_color_gradientn(colours=c("blue","green","red"), values = c(0, 0.4, 1))
+
+hwt1 <- hwt + facet_wrap( ~ Airport, ncol=3)
+
+#### Average wait and max wait are correlated
+### TODO : change attributes
+cor(wh[,5], wh[,6])
+# [1] 0.8718369
+
+# graph of average wait coloured by max wait values
+
+hwt1 <- ggplot(wh, aes(x=Hour, y=AvgWait, color = MaxWait))+geom_point()+
+  scale_color_gradientn(colours=c("blue","green","red"), values = c(0, 0.3, 1))
+
+hwt1 <- hwt1 + facet_wrap( ~ Airport, ncol=3)
+

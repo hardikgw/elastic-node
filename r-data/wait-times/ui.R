@@ -80,7 +80,7 @@ shinyUI(
                  min = min(wtd$Date),
                  max = max(wtd$Date),
                  width = '80%',
-                 value = c(min(wtd$Date)),
+                 value = c(min(wtd$Date),  min(wtd$Date) + 14),
                  animate = animationOptions(interval=500)
                )
              )),
@@ -89,8 +89,14 @@ shinyUI(
                offset = 1,
                tabsetPanel(
                  tabPanel("Corr By Hour", plotOutput("cp")),
-                 tabPanel("Principal Component", plotOutput("pca")),
+                 tabPanel("Principal Component", 
+                          plotOutput("pca"),
+                          plotOutput("pcp"),
+                          plotOutput("pcb")),
                  tabPanel("Regression Charts", plotOutput("rc")),
+                 tabPanel("Kernel Density", plotOutput(outputId="kd",width = "100%")),
+                 tabPanel("Avg by Max", plotOutput(outputId="am",width = "100%")),
+                 tabPanel("Average Wait", plotOutput(outputId="aw", width = "100%")),
                  tabPanel("Animation", 
                           
                           googleBubbleChart("g",

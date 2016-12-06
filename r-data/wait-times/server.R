@@ -6,6 +6,7 @@ library(ggplot2)
 library(car) 
 library(corrplot)
 library(scatterplot3d) 
+library(plyr)
 
 defaultColors <- c("#3366cc", "#dc3912", "#ff9900", "#109618", "#990099", "#0099c6", "#dd4477",
                    "#66AA00", "#B82E2E", "#316395", "#994499", "#22AA99", "#AAAA11", "#6633CC",
@@ -27,7 +28,9 @@ shinyServer(function(input, output) {
   })
   
   wdc <- reactive({
-    subset(wtd,as.Date(Date) == as.Date(input$chart_range),select=c(Airport,AvgWait,Booths,Airport,Count))[order(subset(wtd,as.Date(Date) == as.Date(input$chart_range))$Airport),]
+    subset(wtd,as.Date(Date) >= as.Date(input$chart_range[1]) &
+             as.Date(Date) <= as.Date(input$chart_range[2]),select=c(Airport,AvgWait,Booths,Airport,Count))[order(subset(wtd,as.Date(Date) >= as.Date(input$chart_range[1]) &
+                                                                                                                           as.Date(Date) <= as.Date(input$chart_range[2]))$Airport),]
   })
   
   wh <- reactive({
@@ -35,6 +38,14 @@ shinyServer(function(input, output) {
       wth,
       as.Date(Date) >= as.Date(input$date_range[1]) &
         as.Date(Date) <= as.Date(input$date_range[2])
+    )
+  })
+  
+  whc <- reactive({
+    subset(
+      wth,
+      as.Date(Date) >= as.Date(input$chart_range[1]) &
+        as.Date(Date) <= as.Date(input$chart_range[2])
     )
   })
   
@@ -150,12 +161,23 @@ shinyServer(function(input, output) {
     cbh<-cor(wdh1)
     corrplot(cbh)
   })
+  
   output$pca <- renderPlot({
     wdn1<-cbind(wtd[,1:7],wtd[,9])
     pc1<-prcomp(wdn1)
-    scatterplot3d(pc1$rotation[,1], pc1$rotation[,2], pc1$rotation[,3], 
-                        xlab='Comp.1', ylab='Comp.2', zlab='Comp.3', pch = 20)
+    scatterplot3d(pc1$rotation[,1], pc1$rotation[,2], pc1$rotation[,3], xlab='Comp.1', ylab='Comp.2', zlab='Comp.3', pch = 20)
   })
+  output$pcp <- renderPlot({
+    wdn1<-cbind(wtd[,1:7],wtd[,9])
+    pc1<-prcomp(wdn1)
+    plot(pc1) # amount of variation
+  })  
+  output$pcb <- renderPlot({
+    wdn1<-cbind(wtd[,1:7],wtd[,9])
+    pc1<-prcomp(wdn1)
+    biplot(pc1)
+  })
+  
   output$rc <- renderPlot({
     scatterplotMatrix(~AvgWait+Count+Booths|Airport, data=wtd,main="Scatterplots and regression lines per airport") 
   })
@@ -171,4 +193,29 @@ shinyServer(function(input, output) {
       )
     )
   })
+
+  output$kd <- renderPlot({
+    ggplot(whc(), aes(Hour, AvgWait, fill = Hour, colour = Hour)) +
+    geom_violin(alpha=0.3, size=0.7, width=0.7, trim = FALSE, scale = "width", adjust = 0.5) + 
+    geom_boxplot(width=0.1, outlier.shape = 19, outlier.colour="black", notch = FALSE,notchwidth = .5, alpha = 0.5, colour = "black")+
+    labs(y = "Average Wait", x = "Hour") +
+    facet_wrap( ~ Airport, ncol=6) +
+    geom_violin(alpha=0.3, size=0.7, width=0.7, trim = FALSE, scale = "width", adjust = 0.5) + 
+    geom_boxplot(width=0.1, outlier.shape = 19, outlier.colour="black", notch = FALSE,notchwidth = .5, alpha = 0.5, colour = "black")+
+    labs(y = "Average Wait", x = "Hour") +
+    facet_wrap( ~ Airport, ncol=2) 
+  },height = 3800,width = 1200)
+
+  output$aw <- renderPlot({
+    ggplot(whc(), aes(x=Hour, y=AvgWait, color = AvgWait))+geom_point()+
+    scale_color_gradientn(colours=c("blue","green","red"), values = c(0, 0.3, 1)) +
+    facet_wrap( ~ Airport, ncol=3)
+  },height = 1500,width = 1200)
+  
+  output$am <- renderPlot({
+    ggplot(whc(), aes(x=Hour, y=AvgWait, color = MaxWait))+geom_point() +
+    scale_color_gradientn(colours=c("blue","green","red"), values = c(0, 0.3, 1)) +
+    facet_wrap( ~ Airport, ncol=3)
+  },height = 1500,width = 1200)
+  
 })
