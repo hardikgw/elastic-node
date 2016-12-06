@@ -88,15 +88,16 @@ shinyUI(
                10,
                offset = 1,
                tabsetPanel(
-                 tabPanel("Corr By Hour", plotOutput("cp")),
-                 tabPanel("Principal Component", 
+                 tabPanel("Correlation", plotOutput("cp")),
+                 tabPanel("PCA", 
                           plotOutput("pca"),
                           plotOutput("pcp"),
                           plotOutput("pcb")),
-                 tabPanel("Regression Charts", plotOutput("rc")),
-                 tabPanel("Kernel Density", plotOutput(outputId="kd",width = "100%")),
-                 tabPanel("Avg by Max", plotOutput(outputId="am",width = "100%")),
-                 tabPanel("Average Wait", plotOutput(outputId="aw", width = "100%")),
+                 tabPanel("Regression", plotOutput(outputId="rc",width = "100%")),
+                 tabPanel("Kernel", plotOutput(outputId="kd",width = "100%")),
+                 tabPanel("Kernel", plotOutput(outputId="ka",width = "100%")),
+                 tabPanel("Max-Avg", plotOutput(outputId="am",width = "100%")),
+                 tabPanel("Averge", plotOutput(outputId="aw", width = "100%")),
                  tabPanel("Animation", 
                           
                           googleBubbleChart("g",
@@ -217,12 +218,18 @@ shinyUI(
                8,
                offset = 2,
                tags$ul(
-                 tags$li("Map improvement"),
+                 tags$li("PCA - dynamic ranges, possibly rotation"),
+                 tags$li("PCA - rotation like class notes"),
+                 tags$li("Hexagon binning like learned in class"),
+                 tags$li("Chart labels, descriptions"),
+                 tags$li("Faceting for detailed charts"),
+                 tags$li("Theaming for Regression charts"),
+                 tags$li("Re-evalutate all attributes selection"),
+                 tags$li("Map improvement - tiles, layers, coloring, sizing"),
                  tags$li("Statistical analysis on variation of wait times"),
                  tags$li("Variability of wait time by hour and year"),
                  tags$li("Various attributes like number of aircrafts, booths etc."),
-                 tags$li("Variability of wait time by other data sources (maintenance)"),
-                 tags$li("Userful Charts")
+                 tags$li("Variability of wait time by other data sources (maintenance)")
                )
              )))
   )

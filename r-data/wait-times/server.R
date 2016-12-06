@@ -180,7 +180,7 @@ shinyServer(function(input, output) {
   
   output$rc <- renderPlot({
     scatterplotMatrix(~AvgWait+Count+Booths|Airport, data=wtd,main="Scatterplots and regression lines per airport") 
-  })
+  },height = 900)
   
   output$g <- reactive({
     list(
@@ -205,6 +205,20 @@ shinyServer(function(input, output) {
     labs(y = "Average Wait", x = "Hour") +
     facet_wrap( ~ Airport, ncol=2) 
   },height = 3800,width = 1200)
+  
+  output$ka <- renderPlot({
+    hourwt <- whc()
+    wha <- hourwt[hourwt$Airport=="GUM" | hourwt$Airport=="FAT" |hourwt$Airport=="FLL" | hourwt$Airport=="IAD" ,]
+    ggplot(wha, aes(Hour, AvgWait, fill = Hour, colour = Hour)) +
+      geom_violin(alpha=0.3, size=0.7, width=0.7, trim = FALSE, scale = "width", adjust = 0.5) + 
+      geom_boxplot(width=0.1, outlier.shape = 19, outlier.colour="black", notch = FALSE,notchwidth = .5, alpha = 0.5, colour = "black")+
+      labs(y = "Average Wait", x = "Hour") +
+      facet_wrap( ~ Airport, ncol=6) +
+      geom_violin(alpha=0.3, size=0.7, width=0.7, trim = FALSE, scale = "width", adjust = 0.5) + 
+      geom_boxplot(width=0.1, outlier.shape = 19, outlier.colour="black", notch = FALSE,notchwidth = .5, alpha = 0.5, colour = "black")+
+      labs(y = "Average Wait", x = "Hour") +
+      facet_wrap( ~ Airport, ncol=2) 
+  })
 
   output$aw <- renderPlot({
     ggplot(whc(), aes(x=Hour, y=AvgWait, color = AvgWait))+geom_point()+
