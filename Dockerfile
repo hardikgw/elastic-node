@@ -2,7 +2,7 @@ FROM ubuntu
 MAINTAINER hpatel@channelit.biz
 USER root
 ENV\
-	ES_VER=5.0.0
+	ES_VER=5.2.0
 RUN\ 
 	apt-get update &&\
 	apt-get install -y wget vim nodejs tar npm default-jdk sudo &&\
